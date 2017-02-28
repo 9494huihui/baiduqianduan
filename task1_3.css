@@ -1,0 +1,43 @@
+body {
+	padding: 20px;
+	margin: 0;
+}
+#maindiv {
+	background-color: #eee;
+	border: 1px solid #999;
+	padding: 20px;
+	overflow: auto;
+}
+#leftdiv,#middiv,#rightdiv {
+	background-color: #fff;
+	border: 1px solid #999;
+	padding: 20px;
+}
+#leftdiv {
+	width: 160px;
+	float: left;
+}
+#rightdiv {
+	width: 80px;
+	float: right;
+}
+#middiv {
+	margin-left: 220px;
+	margin-right: 140px;
+}
+#leftdiv span {
+	vertical-align: top;
+}
+#middiv p {
+	line-height: 150%;
+}
+#rightdiv ul {
+	padding: 0;
+}
+#rightdiv ul li {
+	list-style: none;
+	padding-bottom: 20px;
+}
+#rightdiv ul li figcaption {
+	font-size: smaller;
+}
