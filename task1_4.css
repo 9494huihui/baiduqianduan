@@ -1,0 +1,28 @@
+#maindiv { 
+	background-color: #ccc; 
+	width: 400px;
+	height: 200px;
+	position: absolute; 
+	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+  	overflow: hidden;
+} 
+#leftdiv {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	background-color: #fc0;
+	position: absolute;
+	top: -50px;
+	left: -50px;
+}
+#rightdiv {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	background-color: #fc0;
+	position: absolute;
+	bottom: -50px;
+	right: -50px;
+}
