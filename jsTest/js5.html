@@ -1,0 +1,125 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 05</title>
+    <style>
+    	p {
+    		display: inline-block;
+    		width: 10px;
+    		vertical-align: bottom;
+    		background-color: red;
+    		text-align: center;
+    		margin: 3px;
+    	}
+    </style>
+  </head>
+<body>
+	<div>
+	  <input type="text" id="checkin" />
+	
+	  <button id="leftin-btn">左侧入</button>
+	  <button id="rightin-btn">右侧入</button>
+	  <button id="leftout-btn">左侧出</button>
+	  <button id="rightout-btn">右侧出</button>
+	  <button id="sort-btn">排序</button>
+	</div>
+  
+  <div id="disDiv"></div>
+  
+  
+<script type="text/javascript">
+	
+	  var checkin = document.getElementById("checkin");
+	  var libtn = document.getElementById("leftin-btn");
+	  var ribtn = document.getElementById("rightin-btn");
+	  var lobtn = document.getElementById("leftout-btn");
+	  var robtn = document.getElementById("rightout-btn");
+	  var disDiv = document.getElementById("disDiv");
+    var sbtn = document.getElementById("sort-btn");
+    
+    
+  
+	  libtn.onclick = function(){
+	  	var pArr = document.getElementsByTagName("p");
+		  if(pArr.length > 60) {
+		  	alert("队列超出了60个");
+		  	
+		  }
+	  	else {
+	  	if (parseInt(checkin.value)>=10 && parseInt(checkin.value)<=100) {
+		  	var p = document.createElement("p");
+		  	
+		  	p.style.height = checkin.value + 'px';
+		  	disDiv.insertBefore(p, disDiv.childNodes[0]);
+		  	
+		  	
+		  	var pArr = document.getElementsByTagName("p");
+			  for(i in pArr) {
+			  	pArr[i].onclick = function() {
+			  		this.parentNode.removeChild(this);
+			  	};
+			  }
+		  }
+	  	else {
+	  		alert("请输入10-100");
+	  	}
+	  	}
+	  };
+	  
+	  ribtn.onclick = function(){
+	  	var pArr = document.getElementsByTagName("p");
+		  if(pArr.length > 60) {
+		  	alert("队列超出了60个");
+		  	
+		  }
+		  else {
+		  
+	  	if (parseInt(checkin.value)>=10 && parseInt(checkin.value)<=100) {
+		  	var p = document.createElement("p");
+		  	p.style.height = checkin.value + 'px';
+		  	disDiv.appendChild(p);
+		  	
+		  	var pArr = document.getElementsByTagName("p");
+			  for(i in pArr) {
+			  	pArr[i].onclick = function() {
+			  		this.parentNode.removeChild(this);
+			  	};
+			  }
+	  	}
+	  	else {
+	  		alert("请输入10-100");
+	  	}
+	  	}
+	  };
+  
+	  lobtn.onclick = function(){
+	  	
+	  	disDiv.removeChild(disDiv.childNodes[0]);
+	  	
+	  };
+	  
+	  robtn.onclick = function(){
+	  	
+	  	disDiv.removeChild(disDiv.childNodes[disDiv.childNodes.length-1]);
+	  	
+	  };
+	  
+	  sbtn.onclick = function() {
+	  	var pArr = document.getElementsByTagName("p");
+	  	
+	  	for(var i=0; i<pArr.length-1; i++) {
+	  		for(var j=0; j<pArr.length-1-i; j++) {
+	  			if( parseInt(pArr[j].style.height) > parseInt(pArr[j+1].style.height)) {
+	  			var str = pArr[j].style.height;
+	  			pArr[j].style.height = pArr[j+1].style.height;
+	  			pArr[j+1].style.height = str;
+	  		}
+	  		}
+	  		
+	  	}
+	  	
+	  };
+</script>
+</body>
+</html>
