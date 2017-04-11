@@ -1,0 +1,110 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 06</title>
+    <style>
+    	p {
+    		float: left;
+    		width: 30px;
+    		height: 30px;
+    		border: 1px solid #ccc;
+    		text-align: center;
+    		vertical-align: middle;
+    		margin: 5px;
+    	}
+    </style>
+  </head>
+  
+<body>
+	<div>
+	  <textarea cols="20" rows="5" id="checkin"></textarea>
+	
+	  <button id="leftin-btn">左侧入</button>
+	  <button id="rightin-btn">右侧入</button>
+	  <button id="leftout-btn">左侧出</button>
+	  <button id="rightout-btn">右侧出</button>
+	</div>
+  	<div>
+  		<input type="text" id="chaxun"  />
+  		<button id="find-btn">查询</button>
+  	</div>
+  	<div id="disDiv"></div>
+  
+<script>
+	
+	  var checkin = document.getElementById("checkin");
+	  var libtn = document.getElementById("leftin-btn");
+	  var ribtn = document.getElementById("rightin-btn");
+	  var lobtn = document.getElementById("leftout-btn");
+	  var robtn = document.getElementById("rightout-btn");
+	  var disDiv = document.getElementById("disDiv");
+	  var cx = document.getElementById("chaxun");
+	  var fbtn = document.getElementById("find-btn");
+	  
+	  var arr = [];
+	  
+	  function checkinput(){
+	  	arr = checkin.value.split(/\r|\n|\s|\t|\,|[\uFF00-\uFFFF]/);
+	  }
+  
+  
+	  libtn.onclick = function(){
+	  	checkinput();
+	  	for(var i=0; i<arr.length; i++){
+	  		var p = document.createElement("p");
+		  	var textnode = document.createTextNode(arr[i]);
+		  	p.appendChild(textnode);
+		  	disDiv.insertBefore(p, disDiv.childNodes[0]);
+	  	}
+	  	
+	  	var pArr = document.getElementsByTagName("p");
+		  for(i in pArr) {
+		  	pArr[i].onclick = function() {
+		  		this.parentNode.removeChild(this);
+		  	};
+		  }
+	  };
+	  
+	  ribtn.onclick = function(){
+	  	checkinput();
+	  	for(var i=0; i<arr.length; i++){
+	  		var p = document.createElement("p");
+		  	var textnode = document.createTextNode(arr[i]);
+		  	p.appendChild(textnode);
+			disDiv.appendChild(p);
+	  	}
+	  	
+	  	var pArr = document.getElementsByTagName("p");
+		  for(i in pArr) {
+		  	pArr[i].onclick = function() {
+		  		this.parentNode.removeChild(this);
+		  	};
+		  }
+	  };
+  
+	  lobtn.onclick = function(){
+	  	var str = disDiv.childNodes[0].innerHTML;
+	  	disDiv.removeChild(disDiv.childNodes[0]);
+	  	alert(str);
+	  };
+	  
+	  robtn.onclick = function(){
+	  	var str = disDiv.childNodes[disDiv.childNodes.length-1].innerHTML;
+	  	disDiv.removeChild(disDiv.childNodes[disDiv.childNodes.length-1]);
+	  	alert(str);
+	  };
+	  
+	  fbtn.onclick = function(){
+	  	var pArr = document.getElementsByTagName("p");
+		  for(i in pArr) {
+		  	pArr[i].style.backgroundColor = "white";
+		  	if(pArr[i].innerHTML.indexOf(cx.value) != -1){
+		  		pArr[i].style.backgroundColor = "red";
+		  	}
+		  }
+	  };
+	
+</script>
+</body>
+</html>
