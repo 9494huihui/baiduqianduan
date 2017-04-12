@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>IFE JavaScript Task 07</title>
+		<style>
+			.bt{
+				border: 1px solid black;
+				margin: 10px;
+				float: left;
+			}
+			.inbt{
+				width: 30px;
+				height: 20px;
+			}
+			.outbt{
+				overflow: hidden;
+			}
+	
+		</style>
+	</head>
+	
+	<body>
+		<div class="outbt">
+			<div class="bt" id="root">
+				<div class="bt">
+					<div class="bt">
+						<div class="bt">
+							<div class="bt inbt"></div>
+							<div class="bt inbt"></div>
+						</div>
+						<div class="bt">
+							<div class="bt inbt"></div>
+							<div class="bt inbt"></div>
+						</div>
+					</div>
+					<div class="bt">
+						<div class="bt">
+							<div class="bt inbt"></div>
+							<div class="bt inbt"></div>
+						</div>
+						<div class="bt">
+							<div class="bt inbt"></div>
+							<div class="bt inbt"></div>
+						</div>
+					</div>
+				</div>
+				<div class="bt">
+					<div class="bt">
+						<div class="bt">
+							<div class="bt inbt"></div>
+							<div class="bt inbt"></div>
+						</div>
+						<div class="bt">
+							<div class="bt inbt"></div>
+							<div class="bt inbt"></div>
+						</div>
+					</div>
+					<div class="bt">
+						<div class="bt">
+							<div class="bt inbt"></div>
+							<div class="bt inbt"></div>
+						</div>
+						<div class="bt">
+							<div class="bt inbt"></div>
+							<div class="bt inbt"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div>
+			<button id="pre-btn">前序遍历</button>
+			<button id="mid-btn">中序遍历</button>
+			<button id="last-btn">后序遍历</button>
+		</div>
+		
+		<script>
+			var preBtn = document.getElementById("pre-btn"); 
+			var midBtn = document.getElementById("mid-btn"); 
+			var lastBtn = document.getElementById("last-btn"); 
+			var root = document.getElementById("root"); 
+			
+			function setColor(node, setColor) {
+				node.style.borderColor = setColor;
+			}
+			
+			function first(node){
+				
+				console.log(node);
+                setColor(node, "red");
+                
+            	if(node.getElementsByTagName("div")[0]) {                 
+                    first(node.getElementsByTagName("div")[0]);   
+                }
+            	
+                if(node.getElementsByTagName("div")[1]) {               
+                    first(node.getElementsByTagName("div")[1]);   
+                }
+                
+			}
+			
+			function second(){
+			
+			}
+			
+			function last(){
+				
+			}
+			
+			preBtn.onclick = function(){
+				first(root);
+			}
+			midBtn.onclick = second;
+			lastBtn.onclick = last;
+			
+		</script>
+	</body>
+</html>

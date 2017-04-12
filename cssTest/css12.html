@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>html&css 12</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			thead tr{
+				background-color: black;
+				color: white;
+			}
+			tbody tr:nth-child(odd){
+				background-color: white;
+			}
+			tbody tr:nth-child(even){
+				background-color: #999;
+			}
+			tbody tr:nth-child(1),tbody tr:nth-child(2),tbody tr:nth-child(3){
+				color: red;
+			}
+			
+			input:focus{
+				margin-top: 30px;
+				border: 2px solid aqua;
+				width: 300px; 
+			}
+			
+			
+    .tabbox {
+      width: 300px;
+      height: 200px;
+      position: relative;
+    }
+    
+    .op {
+      width: 30px;
+      height: 30px;
+      background-color: #aaa;
+      color: #fff;
+      position: absolute;
+      bottom: 0;
+      text-align: center;
+      vertical-align: middle;
+    }
+    .op-one {
+      right: 64px;
+    }
+    .op-two {
+      right: 32px;
+    }
+    .op-three {
+      right: 0px;
+    }
+    
+    .op-one:hover .tab-one {
+      
+      right: -64px;
+      transition: all 1s;
+      
+    }
+    .op-two:hover .tab-two {
+      
+      right: -32px;
+      transition: all 1s;
+      
+    }
+    .op-three:hover .tab-three {
+      
+      right: 0;
+      transition: all 1s;
+      
+    }
+    .op span {
+      line-height: 30px;
+    }
+    .tab {
+      width: 300px;
+      height: 200px;
+      position: absolute;
+      right: 300px;
+      bottom: 0;
+    }
+    .tab-one {
+      right: -64px;
+      z-index: -1;
+      background-color: rgba(255,0,0,0.5);
+    }
+    .tab-two {
+    	z-index: -1;
+      background-color: rgba(0,255,0,0.5);
+    }
+    .tab-three {
+    	z-index: -1;
+      background-color: rgba(0,0,255,0.5);
+    }
+		</style>
+	</head>
+	
+	<body>
+		<table>
+			<thead>
+				<tr>
+					<th>排名</th>
+					<th>网站</th>
+					<th>热度</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>百度前端学院</td>
+					<td>13000</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>百度前端学院</td>
+					<td>12000</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>百度前端学院</td>
+					<td>11000</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>百度前端学院</td>
+					<td>10000</td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td>百度前端学院</td>
+					<td>9000</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>百度前端学院</td>
+					<td>8000</td>
+				</tr>
+				<tr>
+					<td>7</td>
+					<td>百度前端学院</td>
+					<td>7000</td>
+				</tr>
+				<tr>
+					<td>8</td>
+					<td>百度前端学院</td>
+					<td>6000</td>
+				</tr>
+				<tr>
+					<td>9</td>
+					<td>百度前端学院</td>
+					<td>5000</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>百度前端学院</td>
+					<td>4000</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<input type="text"  />
+		
+		<div class="tabbox">
+			
+		    <div class="op op-one">
+		      <div class="tab tab-one"></div>
+		      <span>1</span>
+		    </div>
+		    
+		    <div class="op op-two">
+		      <div class="tab tab-two"></div>
+		      <span>2</span>
+		    </div>
+		    
+		    <div class="op op-three">
+		      <div class="tab tab-three"></div>
+		      <span>3</span>
+		    </div>
+		    
+		</div>
+	</body>
+</html>
