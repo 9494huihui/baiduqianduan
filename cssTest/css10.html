@@ -11,14 +11,14 @@
 			.parent{
 				display: flex;
 				
-				flex-flow: row wrap;
+				flex-flow: row nowrap;
 				justify-content: space-between;
 				align-items: center;
 			}
 			.child{
 				width: 150px;
 				border: 1px solid #f00;
-				
+				margin: 20px;
 			}
 			.child-one{
 				height: 120px;
@@ -36,6 +36,7 @@
 			
 			@media screen and (max-width: 640px) {
 				.parent{
+					flex-flow: row wrap;
 					align-items: flex-start;
 				}
 				.child-four{
