@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>任务三：表单（三）联动</title>
+		<style>
+			body{
+				margin: 0;
+				padding: 0;
+			}
+			.container{
+				display: flex;
+				flex-flow: row nowrap;
+				justify-content: center;
+				margin-top: 100px;
+			}
+			.child{
+				margin-top: 20px;
+			}
+			.sc{
+				padding-left: 30px;
+			}
+			.select{
+				border-radius: 5px;
+				height: 40px;
+				font-size: 15px;
+			}
+			.select0{
+				width: 100px;
+			}
+			.select1{
+				width: 200px;
+			}
+			.select2{
+				width: 200px;
+				display: none;
+			}
+			.select3{
+				width: 200px;
+				display: none;
+			}
+			.child2{
+				display: none;
+			}
+			.child2 input{
+				width: 300px;
+				border: 1px solid #ccc;
+				border-radius: 5px;
+				height: 40px;
+				font-size: 15px;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<div class="container">
+			<form>
+				<input type="radio" value="in" name="inSchool" class="schoose" checked/>在校生
+				<input type="radio" value="out" name="inSchool" class="schoose" />非在校生
+				
+				<div class="child child1" id="child1">
+					<label class="sc">学校</label>
+					<select class="select select0" id="select">
+						<option checked>北京</option>
+						<option>上海</option>
+						<option>深圳</option>
+					</select>
+					<select class="select select1" id="select1">
+						<option checked>北京大学</option>
+						<option>北京邮电大学</option>
+						<option>北京理工大学</option>
+					</select>
+					<select class="select select2" id="select2">
+						<option checked>上海大学</option>
+						<option>复旦大学</option>
+						<option>同济大学</option>
+					</select>
+					<select class="select select3" id="select3">
+						<option checked>深圳大学</option>
+						<option>中山大学</option>
+						<option>华南理工大学</option>
+					</select>
+				</div>
+				
+				<div class="child child2" id="child2">
+					<label>就业单位</label>
+					<input type="text" />
+				</div>
+			</form>
+		</div>
+		
+		<script>
+			var inSchool = document.getElementsByClassName("schoose");
+			var child1 = document.getElementById("child1");
+			var child2 = document.getElementById("child2");
+			var selectCity = document.getElementById("select");
+			var select1 = document.getElementById("select1");
+			var select2 = document.getElementById("select2");
+			var select3 = document.getElementById("select3");
+			
+			function showSchool(){
+				child1.style.display = "block";
+				child2.style.display = "none";
+			}
+			
+			function showJy(){
+				child2.style.display = "block";
+				child1.style.display = "none";
+			}
+			
+			inSchool[0].onclick = showSchool;
+			inSchool[1].onclick = showJy;
+			selectCity.onchange = function(){
+				switch(this.value){
+					case "北京":
+								select1.style.display = "inline";
+								select2.style.display = "none";
+								select3.style.display = "none";
+								break;
+					case "上海":
+								select2.style.display = "inline";
+								select1.style.display = "none";
+								select3.style.display = "none";
+								break;
+					case "深圳":
+								select3.style.display = "inline";
+								select2.style.display = "none";
+								select1.style.display = "none";
+								break;
+					default:
+								alert("出错啦");
+								break;
+				}
+			};
+		</script>
+	</body>
+</html>
