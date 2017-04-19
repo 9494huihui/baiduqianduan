@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>任务二：表单（二）多个表单项的动态校验</title>
+		<style>
+			body{
+				margin: 0;
+				padding: 0;
+			}
+			.outdiv{
+				margin-top: 20px;
+				margin-left: 300px;
+			}
+			.outdiv1 label{
+				padding-left: 30px;
+			}
+			.outdiv input{
+				width: 800px;
+				height: 50px;
+				border: 1px solid #999;
+				border-radius: 5px;
+				font-size: 30px;
+			}
+			#btn{
+				margin-left: 1020px;
+				margin-top: 20px;
+				width: 150px;
+				height: 50px;
+				border-radius: 5px;
+				color: white;
+				background-color: cornflowerblue;
+				font-size: 20px;
+			}
+			p{
+				margin-left: 70px;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<form>
+			<div class="outdiv outdiv1">
+				<label>名称</label>
+				<input type="text" id="inname" />
+				<p></p>
+			</div>
+			<div class="outdiv outdiv1">
+				<label>密码</label>
+				<input type="text"  id="psw" />
+				<p></p>
+			</div>
+			<div class="outdiv">
+				<label>密码确认</label>
+				<input type="text"  id="psw2" />
+				<p></p>
+			</div>
+			<div class="outdiv outdiv1">
+				<label>邮箱</label>
+				<input type="text" id="email" />
+				<p></p>
+			</div>
+			<div class="outdiv outdiv1">
+				<label>手机</label>
+				<input type="text" id="tel" />
+				<p></p>
+			</div>
+			<button id="btn">提交</button>
+		</form>
+		
+		<script>
+			
+			var inName = document.getElementById("inname");
+			var psw = document.getElementById("psw");
+			var psw2 = document.getElementById("psw2");
+			var email = document.getElementById("email");
+			var tel = document.getElementById("tel");
+			var pArr = document.getElementsByTagName("p");
+			var btn = document.getElementById("btn");
+			var flag0 = false;
+			var flag1 = false;
+			var flag2 = false;
+			var flag3 = false;
+			var flag4 = false;
+				
+			function disName(){
+				pArr[0].innerHTML = "必填，长度为4~16个字符";
+				pArr[0].style.color = "#999";
+			}
+			
+			function disPsw(){
+				pArr[1].innerHTML = "必填，可由6~20位数字、英文、下划线组成";
+				pArr[1].style.color = "#999";
+			}
+			
+			function disPsw2(){
+				pArr[2].innerHTML = "再次输入相同密码";
+				pArr[2].style.color = "#999";
+			}
+			
+			function disEmail(){
+				pArr[3].innerHTML = "输入邮箱";
+				pArr[3].style.color = "#999";
+			}
+			
+			function disTel(){
+				pArr[4].innerHTML = "输入手机号";
+				pArr[4].style.color = "#999";
+			}
+			
+			function len(str){
+				var len = 0;
+				for(var i=0; i<str.length; i++){
+					var val = str.charCodeAt(i);
+					if(val > 0 && val < 128){
+						len++;
+					}
+					else{
+						len = len + 2;
+					}
+				}
+				return len;
+			}
+				
+			function valiName(){
+				if(inName.value == ""){
+					pArr[0].innerHTML = "名称不能为空";
+					pArr[0].style.color = "red";
+					inName.style.borderColor = "red";
+					flag0 = false;
+				}
+				else{
+					if(len(inName.value) < 4 || len(inName.value) > 16){
+						inName.style.borderColor = "red";
+						pArr[0].innerHTML = "名称格式错误";
+						pArr[0].style.color = "red";
+						flag0 = false;
+					}
+					else{
+						inName.style.borderColor = "green";
+						pArr[0].innerHTML = "名称格式正确";
+						pArr[0].style.color = "green";
+						flag0 = true;
+					}
+				}
+			}
+			
+			function valiPsw(){
+				var reg = /^(\w){6,20}$/g;
+				if(psw.value == ""){
+					pArr[1].innerHTML = "密码不能为空";
+					pArr[1].style.color = "red";
+					psw.style.borderColor = "red";
+					flag1 = false;
+				}
+				else{
+					if(!reg.exec(psw.value)){
+						pArr[1].innerHTML = "密码格式错误";
+						pArr[1].style.color = "red";
+						psw.style.borderColor = "red";
+						flag1 = false;
+					}
+					else{
+						psw.style.borderColor = "green";
+						pArr[1].innerHTML = "密码可用";
+						pArr[1].style.color = "green";
+						flag1 = true;
+					}
+				}
+			}
+			
+			function valiPsw2(){
+				if(psw2.value == ""){
+					pArr[2].innerHTML = "密码不能为空";
+					pArr[2].style.color = "red";
+					psw2.style.borderColor = "red";
+					flag2 = false;
+				}
+				else{
+					if(psw2.value !== psw.value){
+					pArr[2].innerHTML = "密码输入不一致";
+					pArr[2].style.color = "red";
+					psw2.style.borderColor = "red";
+					flag2 = false;
+					}
+					else{
+						psw2.style.borderColor = "green";
+						pArr[2].innerHTML = "密码输入一致";
+						pArr[2].style.color = "green";
+						flag2 = true;
+					}
+				}
+			}
+			
+			function valiEmail(){
+				if(email.value == ""){
+					pArr[3].innerHTML = "邮箱不能为空";
+					pArr[3].style.color = "red";
+					email.style.borderColor = "red";
+					flag3 = false;
+				}
+				else{
+					var apos = email.value.indexOf("@");
+					var dotpos = email.value.lastIndexOf(".");
+					if(apos < 1 || dotpos-apos < 2){
+						pArr[3].innerHTML = "邮箱格式错误";
+						pArr[3].style.color = "red";
+						email.style.borderColor = "red";
+						flag3 = false;
+					}
+					else{
+						email.style.borderColor = "green";
+						pArr[3].innerHTML = "邮箱可用";
+						pArr[3].style.color = "green";
+						flag3 = true;
+					}
+				}
+			}
+			
+			function valiTel(){
+				if(tel.value == ""){
+					pArr[4].innerHTML = "手机不能为空";
+					pArr[4].style.color = "red";
+					tel.style.borderColor = "red";
+					flag4 = false;
+				}
+				else{
+					var reg1 = /^[0-9]{11}$/g;
+					
+					if(reg1.test(tel.value)){
+						tel.style.borderColor = "green";
+						pArr[4].innerHTML = "手机格式正确";
+						pArr[4].style.color = "green";
+						flag4 = true;
+					}
+					else{
+						pArr[4].innerHTML = "手机格式错误";
+						pArr[4].style.color = "red";
+						tel.style.borderColor = "red";
+						flag4 = false;
+					}
+				}
+			}
+			
+			function alertS(){
+				if(flag0==true && flag1==true && flag2==true && flag3==true && flag4==true){
+					alert("提交成功");
+				}
+				else{
+					alert("提交失败");
+				}
+			}
+			
+			inName.onfocus = disName;
+			inName.onblur = valiName;
+			
+			psw.onfocus = disPsw;
+			psw.onblur = valiPsw;
+			
+			psw2.onfocus = disPsw2;
+			psw2.onblur = valiPsw2;
+			
+			email.onfocus = disEmail;
+			email.onblur = valiEmail;
+			
+			tel.onfocus = disTel;
+			tel.onblur = valiTel;
+			
+			btn.onclick = alertS;
+		</script>
+	</body>
+</html>
