@@ -6,6 +6,10 @@
 		<meta name="viewport" content="width=decive-width, initial-scale=1, shrink-to-fit=no">
 		<title>这是标题</title>
 		<style>
+			body{
+				margin: 0;
+				padding: 0;
+			}
 			.parent{
 				display: flex;
 				flex-flow: row nowrap;
@@ -15,15 +19,130 @@
 				width: 20%;
 				text-align: center;
 				vertical-align: middle;
-				margin: 30px 0;
+				margin: 20px 0;
 			}
 			.child a{
 				width: 100%;
 				height: 100%;
 				color: black;
-				background-origin: white;
 				font-size: 1.5rem;
 				text-decoration: none;
+				padding: 10px;
+			}
+			.child a:hover{
+				border-bottom: 3px solid aqua;
+			}
+			.showimg{
+				width: 100%;
+			}
+			.img{
+				width: 100%;
+			}
+			.childs{
+				width: 15%;
+				text-align: center;
+				vertical-align: middle;
+				margin: 20px 0;
+			}
+			.showimgs{
+				position: relative;
+				width: 100%;
+				height: 0;
+				padding-top: 100%;
+			}
+			.imgs{
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				border-radius: 50%;
+			}
+			.parent1{
+				justify-content: center;
+				border-top: 2px solid #999;
+				margin: 50px 20px 0px 20px;
+				padding: 20px;
+			}
+			.child1{
+				width: 30%;
+				text-align: center;
+				vertical-align: middle;
+				padding: 20px;
+			}
+			.child2{
+				border-right: 1px solid #999;
+			}
+			.img1{
+				width: 100%;
+				height: 50%;
+			}
+			.fengetiao{
+				width: 100%;
+				height: 20px;
+				background-color: #ccc;
+				margin: 20px 0;
+			}
+			.mokuai{
+				border-bottom: 2px solid #999;
+				margin: 10px;
+				padding: 10px;
+			}
+			.parent2{
+				display: flex;
+				flex-flow: row nowrap;
+				justify-content: space-between;
+				margin: 10px;
+				height: 100px;
+			}
+			.child3{
+				width: 30%;
+				text-align: center;
+				vertical-align: middle;
+			}
+			.child3 img{
+				width: 100%;
+				height: 100%;
+			}
+			.parent3{
+				display: flex;
+				flex-flow: column;
+				align-content: space-between;
+				margin: 10px;
+			}
+			.child4{
+				background-color: #ccc;
+				color: black;
+				text-align: center;
+				vertical-align: middle;
+				height: 40%;
+				margin-bottom: 10px;
+			}
+			.article1{
+				border-bottom: 1px solid #ccc;
+				width: 100%;
+				position: relative;
+				height: 200px;
+			}
+			.article1 img{
+				width: 30%;
+				height: 80%;
+				border: 1px solid #ccc;
+				margin: 20px;
+			}
+			.p1{
+				position: absolute;
+				top: 0px;
+				left: 40%;
+				font-size: 22px;
+				margin-right: 20px;
+			}
+			.p2{
+				position: absolute;
+				bottom: 0px;
+				left: 40%;
+				font-size: 18px;
+				color: #ccc;
 			}
 		</style>
 	</head>
@@ -36,5 +155,139 @@
 			<div class="child"><a href="#">导航</a></div>
 			<div class="child"><a href="#">导航</a></div>
 		</div>
+		
+		<div class="showimg">
+			<img src="../timg.jpg"  class="img"/>
+		</div>
+		
+		<div class="parent">
+			<div class="childs">
+				<div class="showimgs">
+					<img src="../timg.jpg"  class="imgs"/>
+					<p>标题</p>
+				</div>
+			</div>
+			<div class="childs">
+				<div class="showimgs">
+					<img src="../timg.jpg"  class="imgs"/>
+					<p>标题</p>
+				</div>
+			</div>
+			<div class="childs">
+				<div class="showimgs">
+					<img src="../timg.jpg"  class="imgs"/>
+					<p>标题</p>
+				</div>
+			</div>
+			<div class="childs">
+				<div class="showimgs">
+					<img src="../timg.jpg"  class="imgs"/>
+					<p>标题</p>
+				</div>
+			</div>
+			<div class="childs">
+				<div class="showimgs">
+					<img src="../timg.jpg"  class="imgs"/>
+					<p>标题</p>
+				</div>
+			</div>
+		</div>
+		
+		<div class="parent parent1">
+			<div class="child1 child2">
+				<img src="pikaqiu1.jpg"  class="img1"/>
+				<h3>分栏一</h3>
+				<h4>分栏小标题</h4>
+			</div>
+			<div class="child1 child2">
+				<img src="pikaqiu2.jpeg"  class="img1"/>
+				<h3>分栏二</h3>
+				<h4>分栏小标题</h4>
+			</div>
+			<div class="child1">
+				<img src="pikaqiu3.jpeg"  class="img1"/>
+				<h3>分栏三</h3>
+				<h4>分栏小标题</h4>
+			</div>
+		</div>
+		<div class="fengetiao"></div>
+		<div class="mokuai">
+			<h1>模块一</h1>
+		</div>
+		<div class="parent2">
+			<div class="child3">
+				<img src="pikaqiu3.jpeg" />
+			</div>
+			<div class="child3 parent3">
+				<div class="child4">这是文案</div>
+				<div class="child4">这是文案</div>
+			</div>
+			<div class="child3 parent3">
+				<div class="child4">这是文案</div>
+				<div class="child4">这是文案</div>
+			</div>
+		</div>
+		<div class="parent2">
+			<div class="child3">
+				<img src="pikaqiu3.jpeg" />
+			</div>
+			<div class="child3 parent3">
+				<div class="child4">这是文案</div>
+				<div class="child4">这是文案</div>
+			</div>
+			<div class="child3 parent3">
+				<div class="child4">这是文案</div>
+				<div class="child4">这是文案</div>
+			</div>
+		</div>
+		<div class="fengetiao"></div>
+		<div class="mokuai">
+			<h1>模块二</h1>
+		</div>
+		<div class="parent2">
+			<div class="child3">
+				<img src="pikaqiu3.jpeg" />
+			</div>
+			<div class="child3 parent3">
+				<div class="child4">这是文案</div>
+				<div class="child4">这是文案</div>
+			</div>
+			<div class="child3 parent3">
+				<div class="child4">这是文案</div>
+				<div class="child4">这是文案</div>
+			</div>
+		</div>
+		<div class="parent2">
+			<div class="child3">
+				<img src="pikaqiu3.jpeg" />
+			</div>
+			<div class="child3 parent3">
+				<div class="child4">这是文案</div>
+				<div class="child4">这是文案</div>
+			</div>
+			<div class="child3 parent3">
+				<div class="child4">这是文案</div>
+				<div class="child4">这是文案</div>
+			</div>
+		</div>
+		<div class="fengetiao"></div>
+		<div class="article1">
+			<img src="pikaqiu3.jpeg" />
+			<p class="p1">这是文章标题字号是22的文章标题</span>
+			<p class="p2">文章来源 6分钟前</span>
+		</div>
+		<div class="article1">
+			<img src="pikaqiu3.jpeg" />
+			<p class="p1">这是另一个文章标题</span>
+			<p class="p2">文章来源 7分钟前</span>
+		</div>
+		<div class="article1">
+			<img src="pikaqiu3.jpeg" />
+			<p class="p1">这是另一个文章标题</span>
+			<p class="p2">文章来源 7分钟前</span>
+		</div>
+		<script>
+			//document.body.addEventListener('touchstart', function () {});
+		</script>
 	</body>
 </html>

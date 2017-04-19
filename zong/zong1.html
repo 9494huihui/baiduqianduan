@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>任务一：表单（一）单个表单项的检验</title>
+		<style>
+			body{
+				margin: 0;
+				padding: 0;
+			}
+			.parent{
+				display: flex;
+				flex-flow: row nowrap;
+				justify-content: center;
+				margin-top: 200px;
+			}
+			.child{
+				margin-left: 5px;
+			}
+			.child1{
+				padding-top: 5px;
+			}
+			.child2 input{
+				border: 1px solid #999;
+				border-radius: 5px;
+				width: 300px;
+				height: 30px;
+				font-size: 15px;
+			}
+			.child2 p{
+				color: #999;
+			}
+			.child3 button{
+				border-radius: 5px;
+				width: 60px;
+				height: 33px;
+				color: white;
+				background-color: cornflowerblue;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<div class="parent">
+			<div class="child child1">名称</div>
+			<div class="child child2">
+				<input type="text" id="indata" />
+				<p id="vue">必填，长度为4~16个字符</p>
+			</div>
+			<div class="child child3">
+				<button id="btn">验证</button>
+			</div>
+		</div>
+		
+		<script>
+			var btn = document.getElementById("btn");
+			var indata = document.getElementById("indata");
+			var vue = document.getElementById("vue");
+			btn.onclick = validataInput;
+			
+			function len(str){
+				var len = 0;
+				for(var i=0; i<str.length; i++){
+					var val = str.charCodeAt(i);
+					if(val > 0 && val < 128){
+						len++;
+					}
+					else{
+						len = len + 2;
+					}
+				}
+				return len;
+			}
+			
+			function validataInput(){
+				if(indata.value == ""){
+					indata.style.borderColor = "red";
+					vue.innerHTML = "姓名不能为空";
+					vue.style.color = "red";
+				}
+				else{
+					if(len(indata.value) < 4 || len(indata.value) > 16){
+						indata.style.borderColor = "red";
+						vue.innerHTML = "名称格式错误";
+						vue.style.color = "red";
+					}
+					else{
+						indata.style.borderColor = "green";
+						vue.innerHTML = "名称格式正确";
+						vue.style.color = "green";
+					}
+				}
+			}
+		</script>
+	</body>
+</html>
