@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>任务四：听指令的小方块（一）</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.con{
+				position: relative;
+			}
+			.zongdiv{
+				position: absolute;
+				left: 100px;
+				top: 52px;
+			}
+			.zong{
+				width: 20px;
+				height: 52px;
+				line-height: 52px;
+			}
+			.hengdiv{
+				position: absolute;
+				left: 120px;
+				top: 30px;
+			}
+			.heng{
+				display: inline-block;
+				width: 48px;
+				/*这里考虑到inline-block的间距，所以把宽度调小了*/
+				height: 20px;
+				text-align: center;
+			}
+			.tabdiv{
+				position: absolute;
+				left: 120px;
+				top: 50px;
+			}
+			.tab{
+				border: 2px solid black;
+				border-collapse: collapse;
+			}
+			.tab td{
+				border: 1px solid #ccc;
+				width: 50px;
+				height: 50px;
+			}
+			.fangkuai{
+				height: 50px;
+				width: 50px;
+				background-color: red;
+				position: absolute;
+				left: 308px;
+				/*(6，6)位置：2+6*51=308*/
+				top: 308px;
+			}
+			.bluep{
+				margin: 0;
+				position: absolute;
+				left: 0;
+				top: 0;
+				/*刚刚设置为0不对原来是因为p的margin在作祟*/
+				height: 10px;
+				width: 50px;
+				background-color: blue;
+			}
+			.inputdiv{
+				position: absolute;
+				left: 120px;
+				top: 565px;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<div class="con">
+			<div class="zongdiv">
+				<div class="zong">1</div>
+				<div class="zong">2</div>
+				<div class="zong">3</div>
+				<div class="zong">4</div>
+				<div class="zong">5</div>
+				<div class="zong">6</div>
+				<div class="zong">7</div>
+				<div class="zong">8</div>
+				<div class="zong">9</div>
+				<div class="zong">10</div>
+			</div>
+			<div class="hengdiv">
+				<div class="heng">1</div>
+				<div class="heng">2</div>
+				<div class="heng">3</div>
+				<div class="heng">4</div>
+				<div class="heng">5</div>
+				<div class="heng">6</div>
+				<div class="heng">7</div>
+				<div class="heng">8</div>
+				<div class="heng">9</div>
+				<div class="heng">10</div>				
+			</div>
+			<div class="tabdiv">
+				<div>
+					<table class="tab">
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+				</div>
+				<div class="fangkuai" id="gogo">
+					<p class="bluep" id="bluep"></p>
+				</div>
+			</div>
+			<div class="inputdiv">
+				<input type="text" id="instruct"/>
+				<button id="btn">执行</button>
+			</div>
+		</div>
+		
+		<script>
+			var instruct = document.getElementById("instruct");
+			var gogo = document.getElementById("gogo");
+			var bluep = document.getElementById("bluep");
+			var btn = document.getElementById("btn");
+			var flag = 0;
+			var angle = 0;
+			
+			btn.onclick = doIt;
+			
+			function getStyle(obj){
+				return obj.currentStyle ? obj.currentStyle : window.getComputedStyle(obj, null);
+			}
+			
+			function goAhead(){
+				while(flag < 0){
+					flag = flag+4 ;
+				}
+				//console.log(flag%4);
+				switch(flag%4){
+					case 0: 
+						//console.log("正面");
+						if(parseInt(getStyle(gogo).top)-51 < 2 || 
+						parseInt(getStyle(gogo).top)-51 > 461){
+							alert("主人主人，越雷池啦~~");
+						}
+						else{
+							gogo.style.top = parseInt(getStyle(gogo).top) - 51 + "px"; 
+						}
+						break;
+					case 1: 
+						//console.log("右面");
+						if(parseInt(getStyle(gogo).left)+51 < 2 || 
+						parseInt(getStyle(gogo).left)+51 > 461){
+							alert("主人主人，越雷池啦~~");
+						}
+						else{
+							gogo.style.left = parseInt(getStyle(gogo).left) + 51 + "px";  
+						}
+						break;
+					case 2: 
+						//console.log("下面");
+						if(parseInt(getStyle(gogo).top)+51 < 2 || 
+						parseInt(getStyle(gogo).top)+51 > 461){
+							alert("主人主人，越雷池啦~~");
+						}
+						else{
+							gogo.style.top = parseInt(getStyle(gogo).top) + 51 + "px"; 
+						}
+						break;
+					case 3: 
+						//console.log("左面");
+						if(parseInt(getStyle(gogo).left)-51 < 2 || 
+						parseInt(getStyle(gogo).left)-51 > 461){
+							alert("主人主人，越雷池啦~~");
+						}
+						else{
+							gogo.style.left = parseInt(getStyle(gogo).left) - 51 + "px"; 
+						}
+						break;
+				}
+			}
+			
+			function turnLeft(){
+				angle = angle-90 ;
+				gogo.style.transform = "rotate(" + angle + "deg)";
+				flag-- ;
+			}
+			
+			function turnRight(){
+				angle = angle+90 ;
+				gogo.style.transform = "rotate(" + angle + "deg)";
+				flag++ ;
+			}
+			
+			function turnBack(){
+				angle = angle+180 ;
+				gogo.style.transform = "rotate(" + angle + "deg)";
+				flag = flag+2 ;
+			}
+			
+			function doIt(){
+				switch(instruct.value){
+					case "GO": goAhead();break;
+					case "TUN LEF": turnLeft();break;
+					case "TUN RIG": turnRight();break;
+					case "TUN BAC": turnBack();break;
+					//default: alert("输入指令有误");
+				}
+			}
+			
+		</script>
+	</body>
+</html>
