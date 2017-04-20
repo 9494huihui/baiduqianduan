@@ -7,8 +7,6 @@
 			*{
 				margin: 0;
 				padding: 0;
-				transition: all 1s;
-				/*这里有一个bug不知道怎么解决，快速点击两次时*/
 			}
 			.con{
 				position: relative;
@@ -126,6 +124,7 @@
 				left: 306px;
 				/*(6，6)位置：6*51=306*/
 				top: 306px;
+				transition: all 1s;
 			}
 			.bluep{
 				margin: 0;
@@ -339,42 +338,42 @@
 			}
 			
 			function goleft(){
-				if(parseInt(getStyle(gogo).left)-51 < 1 || 
-				parseInt(getStyle(gogo).left)-51 > 510){
+				var leftVal = parseInt(getStyle(gogo).left);
+				if(leftVal-51 < 1 || leftVal-51 > 510){
 					alert("主人主人，越雷池啦~~");
 				}
 				else{
-					gogo.style.left = parseInt(getStyle(gogo).left) - 51 + "px"; 
+					gogo.style.left = leftVal - 51 + "px"; 
 				}
 			}
 			
 			function gotop(){
-				if(parseInt(getStyle(gogo).top)-51 < 1 || 
-				parseInt(getStyle(gogo).top)-51 > 510){
+				var topVal = parseInt(getStyle(gogo).top);
+				if(topVal-51 < 1 || topVal-51 > 510){
 					alert("主人主人，越雷池啦~~");
 				}
 				else{
-					gogo.style.top = parseInt(getStyle(gogo).top) - 51 + "px"; 
+					gogo.style.top = topVal - 51 + "px"; 
 				}
 			}
 			
 			function goright(){
-				if(parseInt(getStyle(gogo).left)+51 < 1 || 
-				parseInt(getStyle(gogo).left)+51 > 510){
+				var leftVal = parseInt(getStyle(gogo).left);
+				if(leftVal+51 < 1 || leftVal+51 > 510){
 					alert("主人主人，越雷池啦~~");
 				}
 				else{
-					gogo.style.left = parseInt(getStyle(gogo).left) + 51 + "px";  
+					gogo.style.left = leftVal + 51 + "px";  
 				}
 			}
 			
 			function gobottom(){
-				if(parseInt(getStyle(gogo).top)+51 < 1 || 
-				parseInt(getStyle(gogo).top)+51 > 510){
+				var topVal = parseInt(getStyle(gogo).top);
+				if(topVal+51 < 1 || topVal+51 > 510){
 					alert("主人主人，越雷池啦~~");
 				}
 				else{
-					gogo.style.top = parseInt(getStyle(gogo).top) + 51 + "px"; 
+					gogo.style.top = topVal + 51 + "px"; 
 				}
 			}
 			
@@ -438,8 +437,8 @@
 			}
 			
 			function moveLeft(){
-				if(parseInt(getStyle(gogo).left)-51 < 1 || 
-				parseInt(getStyle(gogo).left)-51 > 510){
+				var leftVal = parseInt(getStyle(gogo).left);
+				if(leftVal-51 < 1 || leftVal-51 > 510){
 					alert("主人主人，越雷池啦~~");
 				}
 				else{
@@ -464,13 +463,13 @@
 							//console.log("左面");
 							break;
 					}
-					gogo.style.left = parseInt(getStyle(gogo).left) - 51 + "px"; 
+					gogo.style.left = leftVal - 51 + "px"; 
 				}
 			}
 			
 			function moveTop(){
-				if(parseInt(getStyle(gogo).top)-51 < 1 || 
-				parseInt(getStyle(gogo).top)-51 > 510){
+				var topVal = parseInt(getStyle(gogo).top);
+				if(topVal-51 < 1 || topVal-51 > 510){
 					alert("主人主人，越雷池啦~~");
 				}
 				else{
@@ -494,14 +493,14 @@
 							turnRight();
 							break;
 					}
-					gogo.style.top = parseInt(getStyle(gogo).top) - 51 + "px"; 
+					gogo.style.top = topVal - 51 + "px"; 
 				}
 				
 			}
 			
 			function moveRight(){
-				if(parseInt(getStyle(gogo).left)+51 < 1 || 
-				parseInt(getStyle(gogo).left)+51 > 510){
+				var leftVal = parseInt(getStyle(gogo).left);
+				if(leftVal+51 < 1 || leftVal+51 > 510){
 					alert("主人主人，越雷池啦~~");
 				}
 				else{
@@ -525,13 +524,13 @@
 							turnBack();
 							break;
 					}
-					gogo.style.left = parseInt(getStyle(gogo).left) + 51 + "px";  
+					gogo.style.left = leftVal + 51 + "px";  
 				}
 			}
 			
 			function moveBottom(){
-				if(parseInt(getStyle(gogo).top)+51 < 1 || 
-				parseInt(getStyle(gogo).top)+51 > 510){
+				var topVal = parseInt(getStyle(gogo).top);
+				if(topVal+51 < 1 || topVal+51 > 510){
 					alert("主人主人，越雷池啦~~");
 				}
 				else{
@@ -555,7 +554,7 @@
 							turnLeft();
 							break;
 					}
-					gogo.style.top = parseInt(getStyle(gogo).top) + 51 + "px"; 
+					gogo.style.top = topVal + 51 + "px"; 
 				}
 			}
 			
