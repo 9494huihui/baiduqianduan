@@ -120,10 +120,6 @@
 				height: 50px;
 				width: 50px;
 				background-color: red;
-				position: absolute;
-				left: 306px;
-				/*(6，6)位置：6*51=306*/
-				top: 306px;
 				transition: all 1s;
 			}
 			.bluep{
@@ -299,7 +295,7 @@
 						</tr>
 					</table>
 				</div>
-				<div class="fangkuai" id="gogo">
+				<div class="fangkuai" id="gogo" style="position: absolute;left: 306px;top: 306px;">
 					<p class="bluep" id="bluep"></p>
 				</div>
 			</div>
@@ -330,15 +326,24 @@
 			var btn = document.getElementById("btn");
 			var flag = 0;
 			var angle = 0;
+			//var lastClickTime = new Date().getTime();
+			//var delay = 1000;
 			
-			btn.onclick = doIt;
+			btn.onclick = function(){
+				//var cur = new Date().getTime();
+				//if(cur - lastClickTime < delay){
+				//	return;
+				//}
+				//lastClickTime = new Date().getTime();
+				doIt();
+			};
 			
-			function getStyle(obj){
-				return obj.currentStyle ? obj.currentStyle : window.getComputedStyle(obj, null);
-			}
+			//function getStyle(obj){
+			//	return obj.currentStyle ? obj.currentStyle : window.getComputedStyle(obj, null);
+			//}
 			
 			function goleft(){
-				var leftVal = parseInt(getStyle(gogo).left);
+				var leftVal = parseInt(gogo.style.left);
 				if(leftVal-51 < 1 || leftVal-51 > 510){
 					alert("主人主人，越雷池啦~~");
 				}
@@ -348,7 +353,7 @@
 			}
 			
 			function gotop(){
-				var topVal = parseInt(getStyle(gogo).top);
+				var topVal = parseInt(gogo.style.top);
 				if(topVal-51 < 1 || topVal-51 > 510){
 					alert("主人主人，越雷池啦~~");
 				}
@@ -358,7 +363,7 @@
 			}
 			
 			function goright(){
-				var leftVal = parseInt(getStyle(gogo).left);
+				var leftVal = parseInt(gogo.style.left);
 				if(leftVal+51 < 1 || leftVal+51 > 510){
 					alert("主人主人，越雷池啦~~");
 				}
@@ -368,7 +373,7 @@
 			}
 			
 			function gobottom(){
-				var topVal = parseInt(getStyle(gogo).top);
+				var topVal = parseInt(gogo.style.top);
 				if(topVal+51 < 1 || topVal+51 > 510){
 					alert("主人主人，越雷池啦~~");
 				}
@@ -437,7 +442,7 @@
 			}
 			
 			function moveLeft(){
-				var leftVal = parseInt(getStyle(gogo).left);
+				var leftVal = parseInt(gogo.style.left);
 				if(leftVal-51 < 1 || leftVal-51 > 510){
 					alert("主人主人，越雷池啦~~");
 				}
@@ -468,7 +473,7 @@
 			}
 			
 			function moveTop(){
-				var topVal = parseInt(getStyle(gogo).top);
+				var topVal = parseInt(gogo.style.top);
 				if(topVal-51 < 1 || topVal-51 > 510){
 					alert("主人主人，越雷池啦~~");
 				}
@@ -499,7 +504,7 @@
 			}
 			
 			function moveRight(){
-				var leftVal = parseInt(getStyle(gogo).left);
+				var leftVal = parseInt(gogo.style.left);
 				if(leftVal+51 < 1 || leftVal+51 > 510){
 					alert("主人主人，越雷池啦~~");
 				}
@@ -529,7 +534,7 @@
 			}
 			
 			function moveBottom(){
-				var topVal = parseInt(getStyle(gogo).top);
+				var topVal = parseInt(gogo.style.top);
 				if(topVal+51 < 1 || topVal+51 > 510){
 					alert("主人主人，越雷池啦~~");
 				}
