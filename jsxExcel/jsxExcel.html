@@ -1,0 +1,216 @@
+<!--模拟excel表格的排序、编辑、保存、搜索、下载-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <title>jsx-excel</title>
+    <link rel='styleSheet' href='./03.00.table.css' />
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <script src='./react/build/react.js'></script>
+    <script src='./react/build/react-dom.js'></script>
+    <script src='./babel/browser.js'></script>
+
+    <script type='text/babel'>
+
+      var headers = [
+        "Book", "Author", "Language", "Published", "Sales"
+      ];
+
+      var data = [
+        ["The Lord of the Rings", "J. R. R. Tolkien", "English", "1954-1955", "150 million"],
+        ["Le Petit Prince (The Little Prince)", "Antoine de Saint-Exupéry", "French", "1943", "140 million"],
+        ["Harry Potter and the Philosopher's Stone", "J. K. Rowling", "English", "1997", "107 million"],
+        ["And Then There Were None", "Agatha Christie", "English", "1939", "100 million"],
+        ["Dream of the Red Chamber", "Cao Xueqin", "Chinese", "1754-1791", "100 million"],
+        ["The Hobbit", "J. R. R. Tolkien", "English", "1937", "100 million"],
+        ["She: A History of Adventure", "H. Rider Haggard", "English", "1887", "100 million"],
+      ];
+
+      var jsxExcel = React.createClass({
+
+        getInitialState: function(){
+          return {
+            data: this.props.data,
+            sortDir: false,//升序
+            sortCol: null,
+            location: null,
+            show: false
+          };
+        },
+
+        //排序
+        _sort: function(e){
+          var colNum = e.target.cellIndex;
+          var sortDir = (colNum===this.state.sortCol) ? !this.state.sortDir : false;
+          //console.log(sortDir);
+          var sortData = this.state.data;
+          sortData.sort(function(a, b){
+            return sortDir ?
+            (a[colNum] < b[colNum])
+            :
+            (a[colNum] > b[colNum]);
+          });
+          this.setState({
+            data: sortData,
+            sortDir: sortDir,
+            sortCol: colNum
+          });
+        },
+
+        //编辑
+        _edit: function(e){
+          var row = parseInt(e.target.dataset.row);
+          var col = e.target.cellIndex;
+          this.setState({location: {
+            row: row,
+            col: col
+          }});
+        },
+
+        //保存
+        _submit: function(e){
+          //console.log("submit");
+          e.preventDefault();
+          var value = e.target.firstChild.value;
+          //console.log(value);
+          var saveData = Array.from(this.state.data);
+          saveData[this.state.location.row][this.state.location.col] = value;
+          this.setState({
+            data: saveData,
+            location: null
+          });
+        },
+
+        //搜索界面
+        _showSearch: function(){
+          this.setState({show: !this.state.show});
+          this._preData = Array.from(this.state.data);
+        },
+
+        _renderSearch: function(){
+          if(this.state.show){
+            return (
+              <tr>
+                {
+                  this.props.headers.map(function(col, colidx){
+                    return (<td key={colidx}><input type="text" onChange={this._search} data-col={colidx}/></td>);
+                  }, this)
+                }
+              </tr>
+            );
+          }
+          else{
+            //this.setState({data: this._preData});
+            return null;
+          }
+        },
+
+        _preData: null,
+
+        _search: function(e){
+          var searchData = Array.from(this._preData);
+          var targetValue = e.target.value.toLowerCase();
+          console.log(targetValue);
+          if(targetValue === ''){
+            this.setState({data: this._preData});
+          }
+          else{
+            var targetCol = e.target.dataset.col;
+            var newData = searchData.filter(function(ele){
+              return ele[targetCol].toString().toLowerCase().indexOf(targetValue) > -1;
+            }, this);
+            //console.log(newData);filter不改变原数组
+            this.setState({data: newData});
+          }
+        },
+
+        _download: function(format, e){
+          var content = format === 'json' ?
+          JSON.stringify(this.state.data)
+          :
+          this.state.data.reduce(function(result, row){
+            return result +
+            row.reduce(function(rowresult, cell, idx){
+              return rowresult +
+              '"' +
+              cell.replace(/"/g, '""') +
+              '"' +
+              (idx < row.length-1 ? ',' : '');//三元表达式用（）
+            }, '\n')
+          }, '');
+          var URL = window.URL;
+          var blob = new Blob([content], {type: 'text/'+format});
+          e.target.href = URL.createObjectURL(blob);
+          e.target.download = 'jsxExcel.' + format;
+        },
+
+        render: function(){
+          return (
+            <div>
+              <div className='toolbar'>
+                <button onClick={this._showSearch}>Search</button>
+                <a onClick={this._download.bind(this, 'json')}>Export JSON</a>
+                <a onClick={this._download.bind(this, 'csv')}>Export CSV</a>
+              </div>
+              <table>
+                <thead onClick={this._sort}>
+                  <tr>
+                    {
+                      this.props.headers.map(function(col, idx){
+                        if(idx === this.state.sortCol){
+                          col += this.state.sortDir ? '\u2193' : '\u2191';
+                        }
+                        return <th key={idx}>{col}</th>;
+                      }, this)
+                    }
+                  </tr>
+                </thead>
+
+                <tbody onDoubleClick={this._edit}>
+                  {this._renderSearch()}
+                  {
+                    this.state.data.map(function(row, rowidx){
+                      return (
+                        <tr key={rowidx}>{
+                          row.map(function(cell, cellidx){
+                            var content = null;
+                            if(this.state.location && this.state.location.row === rowidx && this.state.location.col === cellidx){
+                              content = (
+                                <form onSubmit={this._submit}>
+                                  <input type="text" defaultValue={cell}/>
+                                </form>
+                              );
+                            }
+                            else{
+                              content = cell;
+                            }
+                            return (
+                              <td key={cellidx} data-row={rowidx}>
+                                {content}
+                              </td>
+                            );
+                          }, this)
+                        }</tr>
+                      );
+                    }, this)
+                  }
+                </tbody>
+              </table>
+            </div>
+          );
+        }
+      });
+
+      ReactDOM.render(
+        React.createElement(jsxExcel, {
+          headers: headers,
+          data: data
+        }),
+        document.getElementById('app')
+      );
+    </script>
+  </body>
+</html>

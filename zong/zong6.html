@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>任务六：UI组件之浮出层</title>
+		
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.botdiv{
+				display: flex;
+				flex-flow: row wrap;
+				justify-content: center;  
+				margin-top: 100px;
+			}
+			.botdiv p{
+				font-size: 30px;
+				color: green;
+				margin: 30px;
+			}
+			.botdiv button{
+				width: 150px;
+				height: 60px;
+				margin: 20px;
+				font-size: 25px;
+				color: white;
+				background-color: cornflowerblue;
+				border-radius: 5px;
+			}
+			.topdiv{
+				border: 1px solid black;
+				width: 50%;
+				height: 50%;
+				position: fixed;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				background-color: white;
+				display: none;
+			}
+			#title{
+				padding-left: 20px;
+				height: 50px;
+				line-height: 50px;
+				background-color: #ccc;
+				cursor: move;
+			}
+			#content{
+				margin: 20px;
+			}
+			#btn1{
+				width: 80px;
+				height: 40px;
+				position: absolute;
+				right: 100px;
+				bottom: 10px;
+			}
+			#btn2{
+				width: 80px;
+				height: 40px;
+				position: absolute;
+				right: 10px;
+				bottom: 10px;
+			}
+			#topdiv .resizeL,#topdiv .resizeR{
+				position: absolute;
+				width: 5px;
+				height: 100%;
+			}
+			#topdiv .resizeL{
+				cursor: w-resize;
+				left: 0;
+			}
+			#topdiv .resizeR{
+				cursor: e-resize;
+				right: 0;
+			}
+			#topdiv .resizeT,#topdiv .resizeB{
+				position: absolute;
+				width: 100%;
+				height: 5px;
+			}
+			#topdiv .resizeT{
+				cursor: n-resize;
+				top: 0;
+			}
+			#topdiv .resizeB{
+				cursor: s-resize;
+				bottom: 0;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<div class="botdiv" id="botdiv">
+			<p>来展现浮出层吧哈哈哈</p>
+			<p>来展现浮出层吧哈哈哈</p>
+			<p>来展现浮出层吧哈哈哈</p>
+			<p>来展现浮出层吧哈哈哈</p>
+			<p>来展现浮出层吧哈哈哈</p>
+			<p>来展现浮出层吧哈哈哈</p>
+			<p>来展现浮出层吧哈哈哈</p>
+			<p>来展现浮出层吧哈哈哈</p>
+			<p>来展现浮出层吧哈哈哈</p>
+			<p>来展现浮出层吧哈哈哈</p>
+			<p>来展现浮出层吧哈哈哈</p>
+			<p>来展现浮出层吧哈哈哈</p>
+			<p>来展现浮出层吧哈哈哈</p>
+			<p>来展现浮出层吧哈哈哈</p>
+			<p>来展现浮出层吧哈哈哈</p>
+			<p>来展现浮出层吧哈哈哈</p>
+			<p>来展现浮出层吧哈哈哈</p>
+			<p>来展现浮出层吧哈哈哈</p>
+			<p>来展现浮出层吧哈哈哈</p>
+			<p>来展现浮出层吧哈哈哈</p>
+			<p>来展现浮出层吧哈哈哈</p>
+			<p>来展现浮出层吧哈哈哈</p>
+			<button id="tan">弹出来</button>
+		</div>
+		<div class="topdiv yeah" id="topdiv">
+			<div id="title" class="yeah">这是一个浮出层</div>
+			<div>
+				<p id="content" class="yeah">这是一个浮出层</p>
+			
+				<button id="btn1">确定</button>
+				<button id="btn2">取消</button>
+				
+			</div>
+			<div class="resizeL yeah"></div>
+			<div class="resizeT yeah"></div>
+			<div class="resizeR yeah"></div>
+			<div class="resizeB yeah"></div>
+			<div class="resizeLT yeah"></div>
+			<div class="resizeTR yeah"></div>
+			<div class="resizeRB yeah"></div>
+			<div class="resizeBL yeah"></div>
+		</div>
+		
+		<script>
+			var tan = document.getElementById("tan");
+			var btn1 = document.getElementById("btn1");
+			var btn2 = document.getElementById("btn2");
+			
+			var topdiv = document.getElementById("topdiv");
+			var botdiv = document.getElementById("botdiv");
+			var ttl = document.getElementById("title");
+			
+			tan.onclick = showTop;
+			btn1.onclick = hiddenTop;
+			btn2.onclick = hiddenTop;
+			
+			function getStyle(obj){
+				return obj.currentStyle ? obj.currentStyle : window.getComputedStyle(obj, null);
+			}
+			
+			window.document.onmousedown = function(e){
+				if(topdiv.style.display == "block"){
+					//console.log(e.target.className);
+					if(e.target.className.indexOf("yeah") == -1){
+						hiddenTop();
+					}	
+				}
+			};
+			
+			/*
+			ttl.onmousedown = function(e){
+				console.log("开始拖曳...");
+				flag = 1;
+				currentX = e.clientX;
+				currentY = e.clientY;
+				console.log(getStyle(topdiv).left);
+				console.log(getStyle(topdiv).top);
+			}
+			
+			window.document.onmousemove = function(e){
+				if(flag == 1){
+					console.log("开始移动...");
+					disX = e.clientX - currentX;
+					disY = e.clientY - currentY;
+					
+					if(parseInt(getStyle(topdiv).left)+disX < 0){
+						topdiv.style.left = 0 + "px";
+					}
+					else{
+						if(parseInt(getStyle(topdiv).left)+disX > document.documentElement.clientWidth-parseInt(getStyle(topdiv).width)){
+							topdiv.style.left = document.documentElement.clientWidth-parseInt(getStyle(topdiv).width) + "px";
+						}
+						else{
+							topdiv.style.left = parseInt(getStyle(topdiv).left) + disX + "px";
+						}
+					}
+					
+					if(parseInt(getStyle(topdiv).top)+disX < 0){
+						topdiv.style.top = 0 + "px";
+					}
+					else{
+						if(parseInt(getStyle(topdiv).top)+disX > document.documentElement.clientHeight-parseInt(getStyle(topdiv).height)){
+							topdiv.style.top = document.documentElement.clientHeight-parseInt(getStyle(topdiv).height) + "px";
+						}
+						else{
+							topdiv.style.top = parseInt(getStyle(topdiv).top) + disX + "px";
+						}
+					}
+					
+					//console.log(disX);
+					//console.log(disY);
+				}
+			}
+			
+			window.document.onmouseup = function(){
+				console.log("停止拖曳...");
+				flag = 0;
+				console.log(getStyle(topdiv).left);
+				console.log(getStyle(topdiv).top);
+			}*/
+			
+			function resize(){
+				
+			}
+			
+			function showTop(){
+				botdiv.style.opacity = "0.5";
+				//document.body.style.overflow = "hidden";
+				topdiv.style.display = "block";
+			}
+			
+			function hiddenTop(){
+				botdiv.style.opacity = "1";
+				topdiv.style.display = "none";
+				//document.body.style.overflow = "visible";
+			}
+		</script>
+	</body>
+</html>
